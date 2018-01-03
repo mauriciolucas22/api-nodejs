@@ -1,5 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+// hash
+const authConfig = require('../config/auth');
 
 const User = require('../models/user');
 
@@ -36,7 +40,14 @@ router.post('/authenticate', async (req, res) => {
     return res.status(400).send({ error: 'Ivalid password' });
   }
 
-  res.send({ user });
+  user.password = undefined;
+
+  // token
+  const token = jwt.sign({ id: user.id }, authConfig.secret, {
+    expiresIn: 86400,
+  });
+
+  res.send({ user, token });
 });
 
 module.exports = app => app.use('/auth', router);
