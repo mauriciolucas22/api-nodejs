@@ -72,7 +72,9 @@ router.post('/forgot_password', async (req, res) => {
 
     const token = crypto.randomBytes(20).toString('hex');
 
-    const now = Date();
+    const now = new Date();
+    now.setHours( now.getHours() + 1 );
+    console.log(now);
     
 
     await User.findByIdAndUpdate(user.id, {
