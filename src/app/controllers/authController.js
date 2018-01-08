@@ -70,7 +70,7 @@ router.post('/forgot_password', async (req, res) => {
 
     const token = ctypto.randomBytes(20).toString('hex');
 
-    const now = newDate();
+    const now = Date();
     now.setHours(now.getHours() + 1);
 
     await User.findByIdAndUpdate(user.id, {
