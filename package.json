@@ -1,23 +1,12 @@
 {
   "name": "api-nodejs",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": "https://github.com/mauriciolucas22/api-nodejs.git",
+  "author": "Mauricio Lucas <mauricio.nq@hotmail.com>",
+  "license": "MIT",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "fs": "0.0.1-security",
-    "jsonwebtoken": "^8.1.0",
-    "mongoose": "^5.0.0-rc0",
-    "nodemailer": "^4.4.1",
-    "nodemailer-express-handlebars": "^2.0.0",
-    "path": "^0.12.7"
+    "express": "^4.16.3"
   }
 }
