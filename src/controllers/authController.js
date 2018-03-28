@@ -6,6 +6,13 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const authConfig = require('../config/auth'); // hash unico para identificar token da app
 
+// gera token
+function generateToken(params = {}) {
+  return jwt.sign(params, authConfig.secret, {
+    expiresIn: 86400, // um dia
+  });
+};
+
 router.post('/register', async (req, res) => {
   const { email } = req.body;
 
@@ -20,7 +27,10 @@ router.post('/register', async (req, res) => {
 
     user.password = undefined; // remove password
 
-    return res.send({ user });
+    return res.send({
+      user,
+      token: generateToken({ id: user.id }), // token para apos cadastro se logar
+    });
 
   } catch (err) {
     console.log(err);
@@ -44,13 +54,11 @@ router.post('/authenticate', async (req, res) => {
 
   user.password = undefined; // remove password
 
-  //gera token
-  const token = jwt.sign({ id: user.id }, authConfig.secret, {
-    expiresIn: 86400, // um dia
-  });
-
   // se existe devolve o user e token
-  res.send({ user, token });
+  res.send({
+    user,
+    token: generateToken({ id: user.id }),
+  });
 });
 
 /**
